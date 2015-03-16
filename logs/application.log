@@ -19,3 +19,33 @@ database [default] connected at jdbc:h2:mem:play
 2015-03-10 17:45:22,748 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
+2015-03-15 22:01:51,894 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play-test-2144730530;] bound to JNDI as DefaultDS
+
+2015-03-15 22:03:09,392 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play-test-1147441890;] bound to JNDI as DefaultDS
+
+2015-03-15 22:08:28,379 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:08:30,117 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:08:30,209 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:08:31,315 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play-test--292218069;] bound to JNDI as DefaultDS
+
+2015-03-15 22:09:55,641 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:09:57,150 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:09:57,253 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play] bound to JNDI as DefaultDS
+
+2015-03-15 22:09:58,418 - [INFO] - from play in pool-1-thread-1 
+datasource [jdbc:h2:mem:play-test--910305949;] bound to JNDI as DefaultDS
+

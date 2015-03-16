@@ -3,9 +3,9 @@ package models;
 /**
  * Created by rafaelle on 14/03/15.
  */
-public class NomeAssunto extends Dica{
+public class NomeAssuntoDica extends Dica{
 
-    public NomeAssunto(String NomeAssunto) {
+    public NomeAssuntoDica(String NomeAssunto) {
         super(NomeAssunto);
     }
 }

@@ -1,56 +1,49 @@
+import models.DAO.DAO;
 import models.Disciplina;
 import models.Tema;
-import models.Usuario;
-import org.junit.Before;
 import org.junit.Test;
-import static org.junit.*;
 
-
-import static play.test.Helpers.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by rafaelle on 10/03/15.
  */
 
 
-public class DisciplinaTest {
+public class DisciplinaTest extends AbstractTest{
 
-    Tema tem;
-    Usuario usuario;
-    @Before
-    public void setUp() {
-        start(fakeApplication(inMemoryDatabase()));
-        usuario = new Usuario();
+    DAO dao = new DAO();
+    Disciplina disciplina;
+    Tema tema;
+    Tema tema2;
+
+    @Test
+    public void deveCriarDisciplina() {
+        disciplina = (Disciplina) dao.findAllByClass(Disciplina.class); //consulta o bd
+        assertTrue(disciplina.equals(null));
+        disciplina = new Disciplina("Calculo");
+        dao.persist(disciplina);
+        disciplina = (Disciplina) dao.findAllByClass(Disciplina.class); //consulta o bd
+        assertNotNull(disciplina);
+        assertTrue(disciplina.equals("Calculo"));
+
     }
 
     @Test
-    public void VerificaCriacaoDeDisciplina(){
-        Disciplina d1 = new Disciplina("d1");
-        assertTrue
+    public void deveAdicionarTema () {
+        tema = new Tema("Limite");
+        tema2 = new Tema("Derivada");
+
+        disciplina.addTema(tema);
+        disciplina.addTema(tema2);
+
+        assertTrue(disciplina.getTemas().size() == 2);
+        assertTrue(disciplina.getTemas().get(0).equals("Limite"));
+        assertTrue(disciplina.getTemas().get(1).equals("Derivada"));
+
 
     }
 
-    @Test
-    public void VerificaAdicaoDeTema(){
-        Disciplina d1 = new Disciplina("d1");
-
-    }
-
-    /*@Test
-    public void VerificaAdicaoDeDependentes() {
-        Disciplina d1 = new Disciplina("d1");
-        Disciplina d2 = new Disciplina("d2");
-
-        Set<Disciplina> dependentesD1 = new HashSet<Disciplina>();
-        Set<Disciplina> requisitosD2 = new HashSet<Disciplina>();
-        assertTrue(dependentesD1.equals(d1.getDependentes()));
-        assertTrue(requisitosD2.equals(d1.getRequisitos()));
-        d1.acrescentaDependente(d2);
-        dependentesD1.add(d2);
-        requisitosD2.add(d1);
-        assertTrue(dependentesD1.equals(d1.getDependentes()));
-        assertTrue(requisitosD2.equals(d2.getRequisitos()));
-    }
-*/
 
 }
