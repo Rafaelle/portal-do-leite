@@ -1,5 +1,0 @@
-[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/rafaelle/prog/si1/portal-do-leite/conf/META-INF,/home/rafaelle/prog/si1/portal-do-leite/target/scala-2.11/classes/META-INF)[0m
-[0m[[0mdebug[0m] [0m	(/home/rafaelle/prog/si1/portal-do-leite/conf/application.conf,/home/rafaelle/prog/si1/portal-do-leite/target/scala-2.11/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/home/rafaelle/prog/si1/portal-do-leite/conf/routes,/home/rafaelle/prog/si1/portal-do-leite/target/scala-2.11/classes/routes)[0m
-[0m[[0mdebug[0m] [0m	(/home/rafaelle/prog/si1/portal-do-leite/conf/META-INF/persistence.xml,/home/rafaelle/prog/si1/portal-do-leite/target/scala-2.11/classes/META-INF/persistence.xml)[0m
