@@ -7,25 +7,34 @@ import java.util.List;
 /**
  * Created by rafaelle on 10/03/15.
  */
-
+@Entity
 public class Tema {
-    final static int MAX_DIFICULDADE = 2;
-    final static int MIN_DIFICULDADE = -2;
+
+    public enum DificuldadeTema{
+        EAZY(-2), NORMAL(-1), HARD(0), EXPERT(1), MASTER(2);
+
+        private int valor;
+        private DificuldadeTema(int valor){
+            this.valor = valor;
+        }
+
+        public int getValor(){
+            return valor;
+        }
+    }
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private String nomeTema;
 
-    @OneToMany(	cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch=FetchType.LAZY,mappedBy="Tema")
-    private List<Dica> dicas;
+    //@OneToMany(	cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
+    //        fetch=FetchType.LAZY,mappedBy="Tema")
+    //private List<Dica> dicas;
 
-    private int dificuldade = MIN_DIFICULDADE;
-
-    public  Tema(){}
+    public  Tema(){ }
     public Tema(String nomeTema) {
         this.nomeTema = nomeTema;
     }
@@ -45,8 +54,7 @@ public class Tema {
     public void setNomeTema(String nomeTema) {
         this.nomeTema = nomeTema;
     }
-
-
+    /*
     public List<Dica> getDica() {
         return dicas;
     }
@@ -65,17 +73,6 @@ public class Tema {
             dicas.add(dica);
         }
     }
-
-    public int getDificuldade() {
-        return dificuldade;
-    }
-
-    public void setDificuldade(int dificuldade) {
-        if (dificuldade >= MIN_DIFICULDADE && dificuldade <= MAX_DIFICULDADE ){
-            this.dificuldade = dificuldade;
-        }
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -101,5 +98,6 @@ public class Tema {
         result = 31 * result + dificuldade;
         return result;
     }
+    */
 }
 

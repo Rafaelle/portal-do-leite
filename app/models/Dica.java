@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -7,6 +8,7 @@ import javax.persistence.Id;
 /**
  * Created by rafaelle on 14/03/15.
  */
+//@Entity
 public abstract class Dica {
 
     @Id
