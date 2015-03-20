@@ -1,14 +1,15 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
  * Created by rafaelle on 14/03/15.
  */
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length=1, discriminatorType= DiscriminatorType.STRING)
+@DiscriminatorValue("D")
 public abstract class Dica {
 
     @Id
