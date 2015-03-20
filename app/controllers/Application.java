@@ -5,6 +5,7 @@ import models.Tema;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.dicasTema;
 import views.html.index;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class Application extends Controller {
         return ok(index.render(temas));
     }
 
+    @Transactional
+    public static Result dicasTema(Long id){
+        Tema tema = dao.findByEntityId(Tema.class, id);
+        return ok(dicasTema.render(tema));
+    }
 
 
 }

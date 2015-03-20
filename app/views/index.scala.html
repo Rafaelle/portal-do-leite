@@ -10,7 +10,7 @@
         <h1>Portal do leite</h1>
         <ul>
             @for(tema <- temas){
-                <li><a href="@tema.getNomeTema()">@tema.getNomeTema()</a></li>
+                <li><a href="@routes.Application.dicasTema(tema.getId())">@tema.getNomeTema()</a></li>
             }
         </ul>
     </body>

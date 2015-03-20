@@ -1,0 +1,17 @@
+@(tema: Tema)
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Outra pagina</title>
+    </head>
+    <body>
+        <h3>@tema.getNomeTema</h3>
+        <ul>
+        @for(dica <- tema.getDica){
+            <li></li>
+        }
+        </ul>
+    </body>
+</html>

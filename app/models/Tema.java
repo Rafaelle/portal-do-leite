@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rafaelle on 10/03/15.
@@ -28,13 +30,13 @@ public class Tema {
     @Column
     private String nomeTema;
 
-    //@OneToMany(	cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
-    //        fetch=FetchType.LAZY,mappedBy="Tema")
-    //private List<Dica> dicas;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Dica> dicas;
 
-    public  Tema(){ }
+    public Tema(){ }
     public Tema(String nomeTema) {
         this.nomeTema = nomeTema;
+        dicas = new ArrayList<Dica>();
     }
 
     public Long getId() {
@@ -52,7 +54,7 @@ public class Tema {
     public void setNomeTema(String nomeTema) {
         this.nomeTema = nomeTema;
     }
-    /*
+
     public List<Dica> getDica() {
         return dicas;
     }
@@ -62,16 +64,9 @@ public class Tema {
     }
 
     public void addDica(Dica dica) {
-        if (dicas.equals(null)){
-            dicas = new ArrayList<Dica>();
-            // recursividde cria o array e depois volta para o proprio metodo com o array criado e adicionando
-            // a dica
-            addDica(dica);
-        } else {
-            dicas.add(dica);
-        }
+        dicas.add(dica);
     }
-
+    /*
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

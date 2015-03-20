@@ -8,17 +8,21 @@ import javax.persistence.Id;
 /**
  * Created by rafaelle on 14/03/15.
  */
-//@Entity
+@Entity
 public abstract class Dica {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    Object nomeDica;
+    String nomeDica;
 
-    public Dica(Object nomeDica){
+    public Dica(String nomeDica){
         this.nomeDica = nomeDica;
+    }
+
+    public Dica() {
+
     }
 
     public Long getId() {
@@ -29,7 +33,7 @@ public abstract class Dica {
         this.id = id;
     }
 
-    void setNomeDica(Object nomeDica) {
+    void setNomeDica(String nomeDica) {
         this.nomeDica = nomeDica;
     }
 
