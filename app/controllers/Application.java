@@ -1,39 +1,29 @@
 package controllers;
 
-import models.DAO.ApplicationDAO;
 import models.DAO.DAO;
 import models.Tema;
-import play.*;
-import play.mvc.*;
+import play.db.jpa.Transactional;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
-import views.html.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Application extends Controller {
 
-    static final ApplicationDAO dao = new ApplicationDAO();
+    static final DAO dao = new DAO();
 
+    @Transactional
     public static Result index() {
-        return redirect(routes.Application.home());
+        return redirect(routes.Application.temas());
     }
 
-    @play.db.jpa.Transactional
-    public static Result home() {
-        Tema tema;
-
-        /* isso aqui é so pra adicionar os temas a primeira vez acho que tme que ir dentro do global
-        String[] nome = {"Análise x Design", "OO", "GRASP", "GoF", "Arquitetura", "Play", "JS", "HTML+CSS+Bootstrap"
-                , "Heroku", "Labs", "Minitestes", "Projeto"};
-
-        for (int i = 0; i < nome.length; i++) {
-            tema = new Tema(nome[i]);
-            dao.persist(tema);
-        }
-        */
-        List<Tema> temas = dao.getAllByClass(Tema.class);
+    @Transactional
+    public static Result temas(){
+        List<Tema> temas = dao.findAllByClass(Tema.class);
         return ok(index.render(temas));
     }
+
+
 
 }

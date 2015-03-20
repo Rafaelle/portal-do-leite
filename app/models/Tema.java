@@ -1,8 +1,6 @@
 package models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rafaelle on 10/03/15.
@@ -27,7 +25,7 @@ public class Tema {
     @GeneratedValue
     private Long id;
 
-    //@Enumerated(EnumType.STRING)
+    @Column
     private String nomeTema;
 
     //@OneToMany(	cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
