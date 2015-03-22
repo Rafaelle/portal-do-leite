@@ -7,18 +7,27 @@ import java.util.List;
 /**
  * Created by rafaelle on 10/03/15.
  */
-@Entity
+@Entity(name = "Tema")
 public class Tema {
 
-    public enum DificuldadeTema{
+    public void setDificuldade(int i) {
+    }
+
+    public int getDificuldade() {
+        return 0;
+    }
+
+
+    public enum DificuldadeTema {
         EAZY(-2), NORMAL(-1), HARD(0), EXPERT(1), MASTER(2);
 
         private int valor;
-        private DificuldadeTema(int valor){
+
+        private DificuldadeTema(int valor) {
             this.valor = valor;
         }
 
-        public int getValor(){
+        public int getValor() {
             return valor;
         }
     }
@@ -30,10 +39,12 @@ public class Tema {
     @Column
     private String nomeTema;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Dica> dicas;
 
-    public Tema(){ }
+    public Tema() {
+    }
+
     public Tema(String nomeTema) {
         this.nomeTema = nomeTema;
         dicas = new ArrayList<Dica>();

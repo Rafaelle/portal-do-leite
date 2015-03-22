@@ -1,25 +1,30 @@
 package models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 
 /**
  * Created by rafaelle on 14/03/15.
  */
-@Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length=1, discriminatorType= DiscriminatorType.STRING)
-@DiscriminatorValue("D")
+
+@Entity(name = "Dica")
 public abstract class Dica {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    String nomeDica;
+    @Column
+    private String nomeDica;
 
-    public Dica(String nomeDica){
-        this.nomeDica = nomeDica;
+    @Column
+    private String usuario;
+
+    public Dica(String usuario) {
+        this.usuario = usuario;
     }
 
     public Dica() {
@@ -41,6 +46,15 @@ public abstract class Dica {
     public Object getNomeDica() {
         return nomeDica;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
 
     @Override
     public boolean equals(Object o) {

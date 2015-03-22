@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET         /                          controllers.Application.index()
-GET         /home                      controllers.Application.temas()
-GET         /dicasTema/:id             controllers.Application.dicasTema(id:Long)
+GET         /                            controllers.Application.index()
 
-POST        /dicasTema/criaDica        controllers.Application.adicionaDica()
-
+GET         /disciplina                       controllers.Application.temas()
+GET         /tema/:id                    controllers.Application.tema(id:Long)
+POST        /dica/addDica/:idTema        controllers.Application.addDica(idTema: Long)
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file              controllers.Assets.at(path="/public", file)
+GET         /assets/*file                controllers.Assets.at(path="/public", file)
+

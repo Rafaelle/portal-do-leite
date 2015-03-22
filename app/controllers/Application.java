@@ -1,23 +1,20 @@
 package controllers;
 
-import models.ConselhoDica;
+import models.*;
 import models.DAO.DAO;
-import models.Dica;
-import models.Tema;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.dicasTema;
 import views.html.index;
+import views.html.tema;
 
 import java.util.List;
 
 public class Application extends Controller {
 
     static final DAO dao = new DAO();
-    private static Long idAtual;
 
     @Transactional
     public static Result index() {
@@ -25,33 +22,59 @@ public class Application extends Controller {
     }
 
     @Transactional
-    public static Result temas(){
+    public static Result temas() {
         List<Tema> temas = dao.findAllByClass(Tema.class);
         return ok(index.render(temas));
     }
 
     @Transactional
-    public static Result dicasTema(Long id){
+    public static Result tema(Long id) {
         Tema tema = dao.findByEntityId(Tema.class, id);
-        idAtual = id;
-        return ok(dicasTema.render(tema));
+        return ok(views.html.tema.render(tema));
     }
+
 
     @Transactional
-    public static Result adicionaDica(){
-        DynamicForm form = Form.form().bindFromRequest();
+    public static Result addDica(Long idTema) {
+        DynamicForm filledForm = Form.form().bindFromRequest();
+        String dica = filledForm.data().get("dica");
+        if (dica.equals("conselhoDica")) {
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            tema.addDica(new ConselhoDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
 
-        String dica1 = form.get("form1");
-        String dica2 = form.get("form2") == null? "" : " pois: " + form.get("form2") ;
+        } else if (dica.equals("linkDica")) {
 
-        Tema tema = dao.findByEntityId(Tema.class, idAtual);
-        System.out.println("antes");
-        tema.addDica(new ConselhoDica(dica1 + dica2)); //tema.addDica(new Dica(dica1 + dica2));
-        System.out.println("depois");
-        dao.persist(tema);
-        dao.flush();
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            tema.addDica(new LinkDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
 
-        return dicasTema(idAtual);
+        } else if (dica.equals("disciplinaDica")) {
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            String razao = filledForm.get("razao");
+            tema.addDica(new DisciplinaDica(session().get("usuario"), dica, razao));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        } else if (dica.equals("assuntoDica")) {
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            tema.addDica(new AssuntoDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        }
+        return Application.tema(idTema);
     }
 
+
 }
+
+
+
+

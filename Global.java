@@ -22,6 +22,8 @@ public class Global extends GlobalSettings {
     public void onStart(Application app) {
         Logger.info("Aplicação inicializada...");
 
+        Disciplina disciplina = new Disciplina("Sistemas de Informação 1");
+
         JPA.withTransaction(new play.libs.F.Callback0() {
 
             @Override
@@ -33,15 +35,15 @@ public class Global extends GlobalSettings {
                 List<String[]> entradas = new ArrayList<String[]>();
 
 
-                try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))){
+                try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
 
-                    while((entrada = reader.readLine()) != null){
+                    while ((entrada = reader.readLine()) != null) {
                         String[] entradaArray = entrada.split(separador);
                         entradas.add(entradaArray);
 
                     }
 
-                } catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
@@ -49,7 +51,7 @@ public class Global extends GlobalSettings {
 
                 //Cria Tema
                 Iterator<String[]> it = entradas.iterator();
-                while(it.hasNext()) {
+                while (it.hasNext()) {
                     String[] entradaAtual = it.next();
 
                     String nomeTema = entradaAtual[0];
@@ -63,7 +65,7 @@ public class Global extends GlobalSettings {
 
                 }
                 int teste = 0;
-                for(Tema tema: novosTemas){
+                for (Tema tema : novosTemas) {
                     dao.persist(tema);
                     dao.flush();
                 }
@@ -80,7 +82,7 @@ public class Global extends GlobalSettings {
             @Override
             public void invoke() throws Throwable {
                 List<Tema> temas = dao.findAllByClass(Tema.class);
-                for(Tema tema: temas){
+                for (Tema tema : temas) {
 
                     dao.remove(tema);
                     dao.flush();

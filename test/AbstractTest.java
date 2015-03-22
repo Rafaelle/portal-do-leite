@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 
 public abstract class AbstractTest {
     public EntityManager em;
+
     @Before
     public void setUp() {
         FakeApplication app = Helpers.fakeApplication(new GlobalSettings());
@@ -25,6 +26,7 @@ public abstract class AbstractTest {
         JPA.bindForCurrentThread(em);
         em.getTransaction().begin();
     }
+
     @After
     public void tearDown() {
         em.getTransaction().commit();
