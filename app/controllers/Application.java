@@ -10,6 +10,7 @@ import play.mvc.Result;
 import views.html.index;
 import views.html.tema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application extends Controller {
@@ -33,7 +34,47 @@ public class Application extends Controller {
         return ok(views.html.tema.render(tema));
     }
 
+    @Transactional
+    public static Result addDicaTipo(Long idTema ,String tipoDica) {
+        DynamicForm filledForm = Form.form().bindFromRequest();
+        String dica = filledForm.data().get("dica");
+        if (tipoDica.equals("ConselhoDica")) {
 
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            System.out.println(session().get("usuario")+"\n");
+            tema.addDica(new ConselhoDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        } else if (tipoDica.equals("LinkDica")) {
+
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            tema.addDica(new LinkDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        } else if (tipoDica.equals("DisciplinaDica")) {
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            String razao = filledForm.get("razao");
+            tema.addDica(new DisciplinaDica(session().get("usuario"), dica, razao));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        } else if (tipoDica.equals("AssuntoDica")) {
+            Tema tema = dao.findByEntityId(Tema.class, idTema);
+            tema.addDica(new AssuntoDica(session().get("usuario"), dica));
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+
+        }
+
+        return Application.tema(idTema);
+    }
+    /* eu não estou usando esse metodo mais preferi não apagar */
     @Transactional
     public static Result addDica(Long idTema) {
         DynamicForm filledForm = Form.form().bindFromRequest();

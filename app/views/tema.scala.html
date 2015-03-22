@@ -96,7 +96,7 @@
 
                                             <ul class="list-group">
                                             @for(dica <- tema.getDica) {
-                                                <li class="list-group-item"> dica</li>
+                                                <li class="list-group-item">@dica</li>
                                             }
                                             </ul>
                                         }
@@ -106,7 +106,7 @@
 
                             </div>
                         </div>
-
+                        <!-- Eu precisei alter name="..." de cada textarea para poder pegar, em todos eles eu coloquei name="dica" -->
                         <div class="panel panel-primary">
                             <div class="panel-heading"><h4>Adicionar dica</h4>
                                 <p class="panel-group">Escolha o tipo de dica que quer adiconar</p></div>
@@ -117,12 +117,74 @@
                                 <div class="btn-group btn-group-vertical btn-block">
                                     <button class="btn btn-primary  " data-target="#addConselho" data-dismiss="modal" name="dica" value="conselhoDica">
                                         Cosenlho</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId,"ConselhoDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Conselho:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Conselho" required data-validation-required-message="Digite um conselho que não seja vazio" maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
                                     <button class="btn btn-primary " data-target="#addDisciplina" data-dismiss="modal" name="dica" value="linkDica">
                                         Link</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "DisciplinaDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Disciplina:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Disciplina" required data-validation-required-message="Digite uma disciplina nao vazia" maxlength="200"></textarea>
+                                                <label class="control-label">Razão pela qual ela é útil:</label>
+                                                <textarea class="form-control" id="message-text" name="razao" placeholder="Razão" required data-validation-required-message="Digite uma razao nao vazia" maxlength="600"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
                                     <button class="btn btn-primary " data-target="#addLink" data-dismiss="modal" name="dica" value="disciplinaDica" >
                                         Disciplina </button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "LinkDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Link:</label>
+                                                <input type="link" class="form-control" name="dica" placeholder="http://www.site.com.br" required data-validation-required-message="" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
                                     <button class="btn btn-primary " data-target="#addAssunto" data-dismiss="modal" name="dica" value="assuntoDica" >
                                         Assunto</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "AssuntoDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Assunto:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Assunto" required data-validation-required-message="Digite um assunto nao vazio" maxlength="700"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
                                 </div>
 
                             </div>
@@ -140,6 +202,7 @@
             This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>
             Bootply.com</strong></a></footer>
 
+            <!-- eu não estou usando esses forms daqui -->
             <!-- Modal Conselho -->
         <div class="modal" id="addConselho">
             <div class="modal-dialog">
