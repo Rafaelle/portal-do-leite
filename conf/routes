@@ -11,5 +11,3 @@ POST        /tema/addDica/:idTema/:tipoDica        controllers.Application.addDi
 POST        /tema/addAvaliacao/:idTema             controllers.Application.addAvaliacao(idTema : Long)
 
 GET         /assets/*file                controllers.Assets.at(path="/public", file)
-=======
-
