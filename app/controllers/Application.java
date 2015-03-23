@@ -31,6 +31,18 @@ public class Application extends Controller {
     @Transactional
     public static Result tema(Long id) {
         Tema tema = dao.findByEntityId(Tema.class, id);
+        List<Dica> dicas = tema.getDica();
+
+        for(int i = 0; i < tema.getDica().size(); i++) {
+            if(dicas.get(i).dicaExclusao()) {
+                dicas.remove(i);
+
+                tema.setDicas(dicas);
+                dao.merge(tema);
+                dao.flush();
+                return ok(views.html.tema.render(tema));
+            }
+        }
         return ok(views.html.tema.render(tema));
     }
 
@@ -73,35 +85,12 @@ public class Application extends Controller {
         return Application.tema(idTema);
     }
 
-/*
-
-    @Transactional
-    private static Result addLikeDica(Long idDica){
-        Dica dica = dao.findByEntityId(Dica.class, idDica);
-        addLike();
-
-    }
-*/
     @Transactional
     public static Result addAvaliacao(Long idTema){
         Tema tema = dao.findByEntityId(Tema.class, idTema);
         DynamicForm filledForm = Form.form().bindFromRequest();
 
             String avaliacao = filledForm.data().get("avaliacao");
-
-            /*
-            if(avaliacao.equals("Facil")){
-                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.EAZY);
-            }else if(avaliacao.equals("Normal")) {
-                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.NORMAL);
-            }else if(avaliacao.equals("Dificil")) {
-                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.HARD);
-            }else if(avaliacao.equals("MuitoDificil")) {
-                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.EXPERT);
-            }else if(avaliacao.equals("Impossivel")){
-                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.MASTER);
-            }
-            */
 
             if(avaliacao.equals("Facil")){
                 tema.addAvaliacaoTema(Tema.DificuldadeTema.EAZY);
@@ -120,10 +109,36 @@ public class Application extends Controller {
             return Application.tema(idTema);
     }
 
+    @Transactional
+    public static Result addLike(Long idTema, Long idDica) {
+        Dica dica = dao.findByEntityId(Dica.class, idDica);
+        dica.addLike();
 
+        dao.merge(dica);
+        dao.flush();
+        return Application.tema(idTema);
+    }
 
+    @Transactional
+    public static Result addDeslike(Long idTema, Long idDica) {
+        Dica dica = dao.findByEntityId(Dica.class, idDica);
+        dica.addDeslike();
 
+        dao.merge(dica);
+        dao.flush();
+        return Application.tema(idTema);
 
+    }
+
+    @Transactional
+    public static Result addFlag(Long idTema, Long idDica) {
+        Dica dica = dao.findByEntityId(Dica.class, idDica);
+        dica.addFlag();
+
+        dao.merge(dica);
+        dao.flush();
+        return Application.tema(idTema);
+    }
 }
 
 

@@ -23,18 +23,13 @@ public abstract class Dica {
     @Column
     private String usuario;
 
-/*
     @Column
-    private int like;
-
-    @Column
-    private int deslike;
-
-
-*/
+    private int[] dadosControle;
 
     public Dica(String usuario) {
         this.usuario = usuario;
+        this.dadosControle = new int[3];
+        iniciaDadosControle();
     }
 
     public Dica() {
@@ -66,6 +61,11 @@ public abstract class Dica {
         this.usuario = usuario;
     }
 
+    public void iniciaDadosControle(){
+        for(int i = 0; i < 3; i++) {
+            dadosControle[i] = 0;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -86,31 +86,47 @@ public abstract class Dica {
         result = 31 * result + (nomeDica != null ? nomeDica.hashCode() : 0);
         return result;
     }
-/*
+
     public int getLike() {
-        return like;
+        return dadosControle[0];
     }
 
     public void setLike(int like) {
-        this.like = like;
+        this.dadosControle[0] = like;
     }
 
     public int getDeslike() {
-        return deslike;
+        return dadosControle[1];
     }
 
     public void setDeslike(int deslike) {
-        this.deslike = deslike;
+        this.dadosControle[1] = deslike;
+    }
+
+    public int getFlag() {
+        return dadosControle[2];
+    }
+
+    public void setFlag(int flag) {
+        this.dadosControle[2] = flag;
     }
 
     public void addLike(){
-        like+=1;
+        this.dadosControle[0] = this.dadosControle[0] >= 20 ? 20 :this.dadosControle[0] + 1;
     }
 
     public void addDeslike(){
-        deslike+=1;
+        this.dadosControle[1] = this.dadosControle[1] >= 20 ? 20 :this.dadosControle[1] + 1;
     }
-*/
+
+    public void addFlag() {
+        this.dadosControle[2] += 1;
+    }
+
+    public boolean dicaExclusao() {
+        return dadosControle[2] >= 3;
+    }
+
 }
 /*Como aluno, clico em um tema e adiciono uma dica no tema. A dica pode ser de diferentes tipos*/
 /* verificar se fica assim mesmo*/

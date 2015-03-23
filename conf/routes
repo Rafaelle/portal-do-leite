@@ -3,11 +3,15 @@
 # ~~~~
 
 # Home page
-GET         /                                      controllers.Application.index()
+GET         /                                       controllers.Application.index()
 
-GET         /disciplina                            controllers.Application.temas()
-GET         /temas/:idTema                         controllers.Application.tema(idTema:Long)
-POST        /tema/addDica/:idTema/:tipoDica        controllers.Application.addDicaTipo(idTema: Long, tipoDica: String)
-POST        /tema/addAvaliacao/:idTema             controllers.Application.addAvaliacao(idTema : Long)
+GET         /disciplina                             controllers.Application.temas()
+GET         /temas/:idTema                          controllers.Application.tema(idTema:Long)
+POST        /tema/addDica/:idTema/:tipoDica         controllers.Application.addDicaTipo(idTema: Long, tipoDica: String)
+POST        /tema/addAvaliacao/:idTema              controllers.Application.addAvaliacao(idTema : Long)
 
-GET         /assets/*file                controllers.Assets.at(path="/public", file)
+POST        /tema/addLike/:idTema/:idDica           controllers.Application.addLike(idTema : Long, idDica : Long)
+POST        /tema/addDeslike/:idTema/:idDica        controllers.Application.addDeslike(idTema : Long, idDica : Long)
+POST        /tema/addFlag/:idTema/:idDica           controllers.Application.addFlag(idTema : Long, idDica : Long)
+
+GET         /assets/*file                           controllers.Assets.at(path="/public", file)

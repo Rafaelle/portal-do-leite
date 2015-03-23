@@ -106,11 +106,23 @@
                                                 <div class="panel-footer">
 
                                                     <span class="pull-right">
-                                                        <i id="like1" class="glyphicon glyphicon-thumbs-up"></i> <div id="like1-bs3"></div>
-                                                        <i id="dislike1" class="glyphicon glyphicon-thumbs-down"></i> <div id="dislike1-bs3"></div>
-                                                    </span>
-                                                </div>
+                                                        <form method="post" action="@routes.Application.addLike(tema.getId,dica.getId)" role="form">
+                                                            <button id="like1" class="glyphicon glyphicon-thumbs-up"></button> <div id="like1-bs3"></div>
+                                                        </form>
 
+                                                        <form method="post" style="float: right;" action="@routes.Application.addDeslike(tema.getId,dica.getId)" role="form">
+                                                            <button id="dislike1" class="glyphicon glyphicon-thumbs-down"></button> <div id="dislike1-bs3"></div>
+                                                        </form>
+                                                    </span>
+
+                                                    <label for="sel1">Likes:@dica.getLike </label>
+                                                    <label for="sel1">Deslikes:@dica.getDeslike </label>
+
+                                                    <br>
+                                                    <form method="post" action="@routes.Application.addFlag(tema.getId,dica.getId)" role="form">
+                                                        <button id="flag1" class="glyphicon glyphicon-exclamation-sign"></button> <div id="flag1-bs3"></div>
+                                                    </form>
+                                                </div>
                                                 </li>
                                             }
                                             </ul>
