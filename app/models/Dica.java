@@ -22,15 +22,15 @@ public abstract class Dica {
 
     @Column
     private String usuario;
-
+/*
     @Column
     private int like;
 
     @Column
     private int deslike;
 
-    
 
+*/
     public Dica(String usuario) {
         this.usuario = usuario;
     }
@@ -84,7 +84,7 @@ public abstract class Dica {
         result = 31 * result + (nomeDica != null ? nomeDica.hashCode() : 0);
         return result;
     }
-
+/*
     public int getLike() {
         return like;
     }
@@ -108,7 +108,7 @@ public abstract class Dica {
     public void addDeslike(){
         deslike+=1;
     }
-
+*/
 }
 /*Como aluno, clico em um tema e adiciono uma dica no tema. A dica pode ser de diferentes tipos*/
 /* verificar se fica assim mesmo*/
