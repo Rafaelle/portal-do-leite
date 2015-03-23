@@ -106,6 +106,24 @@
 
                             </div>
                         </div>
+
+                        <div>
+                            <h3>Avaliar Tema</h3>
+                            <form method="post" action="@routes.Application.addAvaliacao(tema.getId)" role="form">
+                                <select id="avaliacao" name="avaliacao">
+                                    <option value="Facil">Fácil</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Dificil">Difícil</option>
+                                    <option value="MuitoDificil">Muito Difícil</option>
+                                    <option value="Impossivel">Impossivel</option>
+                                </select>
+                                <button>Ok</button>
+                            </form>
+
+                            Estatísticas de Dificuldade <br>
+                            Média: @tema.getAvaliacaoMedia(); Mediana: @tema.getAvaliacaoMediana();
+                        </div>
+
                         <!-- Eu precisei alter name="..." de cada textarea para poder pegar, em todos eles eu coloquei name="dica" -->
                         <div class="panel panel-primary">
                             <div class="panel-heading"><h4>Adicionar dica</h4>

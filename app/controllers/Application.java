@@ -74,6 +74,47 @@ public class Application extends Controller {
 
         return Application.tema(idTema);
     }
+
+    @Transactional
+    public static Result addAvaliacao(Long idTema){
+        Tema tema = dao.findByEntityId(Tema.class, idTema);
+        DynamicForm filledForm = Form.form().bindFromRequest();
+
+            String avaliacao = filledForm.data().get("avaliacao");
+
+            /*
+            if(avaliacao.equals("Facil")){
+                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.EAZY);
+            }else if(avaliacao.equals("Normal")) {
+                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.NORMAL);
+            }else if(avaliacao.equals("Dificil")) {
+                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.HARD);
+            }else if(avaliacao.equals("MuitoDificil")) {
+                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.EXPERT);
+            }else if(avaliacao.equals("Impossivel")){
+                tema.addAvaliacaoTema(new Usuario("joao", "joao", "joao"), Tema.DificuldadeTema.MASTER);
+            }
+            */
+
+            if(avaliacao.equals("Facil")){
+                tema.addAvaliacaoTema(Tema.DificuldadeTema.EAZY);
+            }else if(avaliacao.equals("Normal")) {
+                tema.addAvaliacaoTema(Tema.DificuldadeTema.NORMAL);
+            }else if(avaliacao.equals("Dificil")) {
+                tema.addAvaliacaoTema(Tema.DificuldadeTema.HARD);
+            }else if(avaliacao.equals("MuitoDificil")) {
+                tema.addAvaliacaoTema(Tema.DificuldadeTema.EXPERT);
+            }else if(avaliacao.equals("Impossivel")){
+                tema.addAvaliacaoTema(Tema.DificuldadeTema.MASTER);
+            }
+
+            dao.merge(tema);
+            dao.flush();
+            return Application.tema(idTema);
+    }
+
+
+
     /* eu não estou usando esse metodo mais preferi não apagar */
     @Transactional
     public static Result addDica(Long idTema) {
