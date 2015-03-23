@@ -13,6 +13,7 @@ public class LinkDica extends Dica {
     private String link;
 
     public LinkDica() {
+
     }
 
     public LinkDica(String usuario, String link) {

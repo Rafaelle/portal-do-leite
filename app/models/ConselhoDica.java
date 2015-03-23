@@ -12,6 +12,7 @@ public class ConselhoDica extends Dica {
     private String conselhoDica;
 
     public ConselhoDica() {
+
     }
 
     public ConselhoDica(String usuario, String conselho) {

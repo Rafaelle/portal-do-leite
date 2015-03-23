@@ -16,6 +16,7 @@ public class DisciplinaDica extends Dica {
     private String razao;
 
     public DisciplinaDica() {
+
     }
 
     public DisciplinaDica(String usuario, String disciplinaNome, String razao) {

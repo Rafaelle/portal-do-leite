@@ -13,6 +13,7 @@ public class AssuntoDica extends Dica {
     private String assunto;
 
     public AssuntoDica() {
+
     }
 
     public AssuntoDica(String usuario, String assunto) {

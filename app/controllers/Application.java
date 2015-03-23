@@ -75,6 +75,15 @@ public class Application extends Controller {
         return Application.tema(idTema);
     }
 
+
+
+    @Transactional
+    private static Result addLikeDica(Long idDica){
+        Dica dica = dao.findByEntityId(Dica.class, idDica);
+        addLike();
+
+    }
+
     @Transactional
     public static Result addAvaliacao(Long idTema){
         Tema tema = dao.findByEntityId(Tema.class, idTema);
