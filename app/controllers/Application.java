@@ -124,44 +124,6 @@ public class Application extends Controller {
 
 
 
-    /* eu não estou usando esse metodo mais preferi não apagar */
-    @Transactional
-    public static Result addDica(Long idTema) {
-        DynamicForm filledForm = Form.form().bindFromRequest();
-        String dica = filledForm.data().get("dica");
-        if (dica.equals("conselhoDica")) {
-            Tema tema = dao.findByEntityId(Tema.class, idTema);
-            tema.addDica(new ConselhoDica(session().get("usuario"), dica));
-            dao.merge(tema);
-            dao.flush();
-            return Application.tema(idTema);
-
-        } else if (dica.equals("linkDica")) {
-
-            Tema tema = dao.findByEntityId(Tema.class, idTema);
-            tema.addDica(new LinkDica(session().get("usuario"), dica));
-            dao.merge(tema);
-            dao.flush();
-            return Application.tema(idTema);
-
-        } else if (dica.equals("disciplinaDica")) {
-            Tema tema = dao.findByEntityId(Tema.class, idTema);
-            String razao = filledForm.get("razao");
-            tema.addDica(new DisciplinaDica(session().get("usuario"), dica, razao));
-            dao.merge(tema);
-            dao.flush();
-            return Application.tema(idTema);
-
-        } else if (dica.equals("assuntoDica")) {
-            Tema tema = dao.findByEntityId(Tema.class, idTema);
-            tema.addDica(new AssuntoDica(session().get("usuario"), dica));
-            dao.merge(tema);
-            dao.flush();
-            return Application.tema(idTema);
-
-        }
-        return Application.tema(idTema);
-    }
 
 
 }
