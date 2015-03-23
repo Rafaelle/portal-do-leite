@@ -1,0 +1,261 @@
+@(tema: Tema)
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Portal do leite</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script href="@routes.Assets.at("javascript/jquery.js")"></script>
+            <!-- Reference: https://github.com/ashleydw/lightbox/ -->
+        <script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+        <link href="@routes.Assets.at("stylesheets/bootstrap.min.css")" rel="stylesheet">
+
+            <!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+        <link href="@routes.Assets.at("stylesheets/styles.css")" rel="stylesheet">
+    </head>
+    <body>
+            <!-- Header -->
+        <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">PORTAL DO LEITE</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>
+                                Admin <span class="caret"></span></a>
+                            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                                <li><a href="#">My Profile</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div> <!-- /container -->
+        </div>
+            <!-- /Header -->
+
+            <!-- Main -->
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-sm-3">
+                        <!-- Left column -->
+
+                    <strong class="glyphicon glyphicon-wrench"> Portal do Leite</strong>
+
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">
+                            <h5>Menu <i class="glyphicon glyphicon-chevron-down"></i></h5>
+                        </a>
+                            <ul class="list-unstyled collapse in" id="userMenu">
+                                <li><a href="@routes.Application.index()"><i class="glyphicon glyphicon-book"></i>
+                                    Temas</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr>
+
+                </div> <!-- /col-3 -->
+                <div class="col-sm-9">
+
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Tema</strong></a>
+
+                    <hr>
+
+
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h4>@tema.getNomeTema()</h4></div>
+                            <div class="panel-body">
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading"><h4>Dicas</h4></div>
+                                    <div class="panel-body">
+                                        <div class="list-group">
+                                        @if((tema.getDica().isEmpty)) {
+                                            <div class="alert alert-info">
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                Não há dicas adicionadas.
+                                            </div>
+                                        } else {
+
+
+                                            <ul class="list-group">
+                                            @for(dica <- tema.getDica) {
+                                                <li class="list-group-item">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">@dica
+                                                        </div>
+                                                    </div>
+                                                <div class="panel-footer">
+
+                                                    <span class="pull-right">
+                                                        <i id="like1" class="glyphicon glyphicon-thumbs-up"></i> <div id="like1-bs3"></div>
+                                                        <i id="dislike1" class="glyphicon glyphicon-thumbs-down"></i> <div id="dislike1-bs3"></div>
+                                                    </span>
+                                                </div>
+
+                                                </li>
+                                            }
+                                            </ul>
+                                        }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h4>Avalie a dificuldade do tema</h4>
+                                <p class="panel-group">Escolha o nivel de dificuldade para o tema atual</p></div>
+
+
+                            <div class="panel-body">
+
+                            <form method="post" action="@routes.Application.addAvaliacao(tema.getId)" role="form">
+                                <div class="form-group">
+                                    <select id="avaliacao" class="form-control" name="avaliacao">
+                                        <option value="Facil">Fácil</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Dificil">Difícil</option>
+                                        <option value="MuitoDificil">Muito Difícil</option>
+                                        <option value="Impossivel">Impossivel</option>
+                                    </select>
+                                    <br>
+                                    <button class="btn btn-primary">Enviar</button>
+                                    <br>
+
+                                </div>
+                            </form>
+                            <label for="sel1">Informações sobre a dificuldade:</label>
+                            <p>Média: @tema.getAvaliacaoMedia();</p>
+                            <p>Mediana: @tema.getAvaliacaoMediana();</p>
+                        </div>
+                        </div>
+
+                        <!-- Eu precisei alter name="..." de cada textarea para poder pegar, em todos eles eu coloquei name="dica" -->
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h4>Adicionar dica</h4>
+                                <p class="panel-group">Escolha o tipo de dica que quer adiconar</p></div>
+
+                            <div class="panel-body">
+
+                                <p>Adicionar um:</p>
+                                <div class="btn-group btn-group-vertical btn-block">
+                                    <button class="btn btn-primary  " data-target="#addConselho" data-dismiss="modal" name="dica" value="conselhoDica">
+                                        Cosenlho</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId,"ConselhoDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Conselho:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Conselho" required data-validation-required-message="Digite um conselho que não seja vazio" maxlength="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
+                                    <button class="btn btn-primary " data-target="#addDisciplina" data-dismiss="modal" name="dica" value="linkDica">
+                                        Link</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "DisciplinaDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Disciplina:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Disciplina" required data-validation-required-message="Digite uma disciplina nao vazia" maxlength="200"></textarea>
+                                                <label class="control-label">Razão pela qual ela é útil:</label>
+                                                <textarea class="form-control" id="message-text" name="razao" placeholder="Razão" required data-validation-required-message="Digite uma razao nao vazia" maxlength="600"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
+                                    <button class="btn btn-primary " data-target="#addLink" data-dismiss="modal" name="dica" value="disciplinaDica" >
+                                        Disciplina </button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "LinkDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Link:</label>
+                                                <input type="link" class="form-control" name="dica" placeholder="http://www.site.com.br" required data-validation-required-message="" maxlength="200">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
+                                    <button class="btn btn-primary " data-target="#addAssunto" data-dismiss="modal" name="dica" value="assuntoDica" >
+                                        Assunto</button>
+
+                                    <form role="form" action="@routes.Application.addDicaTipo(tema.getId, "AssuntoDica")" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Assunto:</label>
+                                                <textarea type="text" class="form-control" name="dica" placeholder="Assunto" required data-validation-required-message="Digite um assunto nao vazio" maxlength="700"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                                                Cancelar</button>
+                                            <button type="submit" class="btn btn-primary" >Enviar</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!--/col-md-12-->
+
+            </div> <!--/row-->
+
+            <hr>
+        </div>
+            <!-- /Main -->
+
+        <footer class="text-center">
+            This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>
+            Bootply.com</strong></a></footer>
+
+           <!-- script references -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/jscripts.js")" rel="javascript" media="screen"></script>
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" rel="javascript" media="screen"></script>
+    </body>
+</html>
+
+
+
+
+
+

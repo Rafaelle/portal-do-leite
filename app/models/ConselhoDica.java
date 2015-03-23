@@ -11,14 +11,12 @@ public class ConselhoDica extends Dica {
     @Column
     private String conselhoDica;
 
-    public ConselhoDica() {
-    }
+    public ConselhoDica(){}
 
     public ConselhoDica(String usuario, String conselho) {
         super(usuario);
         this.conselhoDica = conselho;
     }
-
     public String getConselhoDica() {
         return conselhoDica;
     }

@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import java.util.List;
 
 
-
 public class DAO {
 
     public boolean persist(Object e) {
@@ -26,7 +25,7 @@ public class DAO {
         JPA.em().merge(e);
     }
 
-    public void refresh(Object e){
+    public void refresh(Object e) {
         JPA.em().refresh(e);
     }
 
@@ -48,16 +47,16 @@ public class DAO {
         JPA.em().remove(objeto);
     }
 
-    public void clear(){
+    public void clear() {
         JPA.em().clear();
     }
 
-    public void commitAndContinue(){
+    public void commitAndContinue() {
         JPA.em().getTransaction().commit();
         JPA.em().getTransaction().begin();
     }
 
-    public void commitAndFinish(){
+    public void commitAndFinish() {
         JPA.em().getTransaction().commit();
     }
 
@@ -70,15 +69,15 @@ public class DAO {
     }
 
     public <T> List<T> findByMultiplesAttributes(String className, List<String> attributesNames, List<String> attributesValues) {
-        if(attributesNames == null || attributesNames.isEmpty() ||
+        if (attributesNames == null || attributesNames.isEmpty() ||
                 attributesValues == null || attributesValues.isEmpty())
             throw new RuntimeException("Can not create Query. Invalid parameter list");
 
         String hql = "FROM " + className + " c" + " WHERE c." +
                 attributesNames.get(0) + " = '" + attributesValues.get(0) + "'";
 
-        if(attributesNames.size() == attributesValues.size()){
-            for(int i = 1; i < attributesValues.size(); i++){
+        if (attributesNames.size() == attributesValues.size()) {
+            for (int i = 1; i < attributesValues.size(); i++) {
                 hql += " AND c." + attributesNames.get(i) + " = '" + attributesValues.get(i) + "'";
             }
         }

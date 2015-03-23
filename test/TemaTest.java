@@ -1,6 +1,6 @@
 import models.DAO.DAO;
 import models.Dica;
-import models.NomeAssuntoDica;
+import models.AssuntoDica;
 import models.Tema;
 import org.junit.Test;
 
@@ -10,8 +10,6 @@ import static org.junit.Assert.*;
  * Created by rafaelle on 15/03/15.
  */
 public class TemaTest extends AbstractTest {
-
-
 
 
     DAO dao = new DAO();
@@ -33,24 +31,24 @@ public class TemaTest extends AbstractTest {
     }
 
     @Test
-    public void deveTerEMudarDificuldade () {
+    public void deveTerEMudarDificuldade() {
         tema = new Tema("Limite");
         dao.persist(tema);
 
-        assertEquals(tema.getDificuldade(),-2);
+        assertEquals(tema.getDificuldade(), -2);
         tema.setDificuldade(0);
-        assertEquals(tema.getDificuldade(),0);
+        assertEquals(tema.getDificuldade(), 0);
 
     }
 
 
     @Test
     //testar melhor isso aqui
-    public void deveAdicionarTema () {
+    public void deveAdicionarTema() {
         tema = new Tema("Serie");
 
-        dica = new NomeAssuntoDica("integral");
-        dica2 = new NomeAssuntoDica("limite");
+        dica = new AssuntoDica("integral");
+        dica2 = new AssuntoDica("limite");
 
         tema.addDica(dica);
         tema.addDica(dica2);
@@ -61,9 +59,6 @@ public class TemaTest extends AbstractTest {
 
 
     }
-
-
-
 
 
 }

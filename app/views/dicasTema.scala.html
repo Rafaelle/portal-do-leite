@@ -10,8 +10,57 @@
         <h3>@tema.getNomeTema</h3>
         <ul>
         @for(dica <- tema.getDica){
-            <li></li>
+            <li>@dica.getNomeDica</li>
         }
         </ul>
+
+        <h2>Dicas para o tema</h2>
+
+            <div>
+                <form method="post" action="/dicasTema/criaDica">
+                    <div class="formAlign">
+                        <h4>O Que é preciso saber para não ter dificudade</h4>
+                        <input name="form1" type="text" placeholder="Digite a sua dica" required/>
+                        <br>
+                    </div>
+                    <input class="btn" type="submit" value="Submeter"/>
+                </form>
+            </div>
+
+            <div>
+                <form method="post" action="/dicasTema/criaDica">
+                    <div class="formAlign">
+                        <h4>Disciplinas anteriores que te ajudaram aqui</h4>
+                        <input name="form1" type="text" placeholder="Digite o nome da materia" required/>
+                        <input name="form2" type="text" placeholder="Digite a sua justificativa" required/>
+                        <br>
+                    </div>
+                    <input class="btn" type="submit" value="Submeter"/>
+                </form>
+            </div>
+
+            <div>
+                <form method="post" action="/dicasTema/criaDica">
+                    <div class="formAlign">
+                        <h4>Material Util</h4>
+                        <input name="form1" type="text" placeholder="Digite a url" required/>
+                        <br>
+                    </div>
+                    <input class="btn" type="submit" value="Submeter"/>
+                </form>
+            </div>
+
+            <div>
+                <form method="post" action="/dicasTema/criaDica">
+                    <div class="formAlign">
+                        <h4>Conselho para quem vai pagar a disciplina</h4>
+                        <input name="form1" type="text" placeholder="Digite o seu conselho" required/>
+                        <br>
+                    </div>
+                    <input class="btn" type="submit" value="Submeter"/>
+                </form>
+            </div>
     </body>
+
+    <a href="http://localhost:9000/home">voltar</a>
 </html>

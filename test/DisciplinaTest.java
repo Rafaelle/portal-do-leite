@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  */
 
 
-public class DisciplinaTest extends AbstractTest{
+public class DisciplinaTest extends AbstractTest {
 
     DAO dao = new DAO();
     Disciplina disciplina;
@@ -31,7 +31,7 @@ public class DisciplinaTest extends AbstractTest{
     }
 
     @Test
-    public void deveAdicionarTema () {
+    public void deveAdicionarTema() {
         tema = new Tema("Limite");
         tema2 = new Tema("Derivada");
 

@@ -23,6 +23,16 @@ public abstract class Dica {
     @Column
     private String usuario;
 
+/*
+    @Column
+    private int like;
+
+    @Column
+    private int deslike;
+
+
+*/
+
     public Dica(String usuario) {
         this.usuario = usuario;
     }
@@ -38,6 +48,7 @@ public abstract class Dica {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     void setNomeDica(String nomeDica) {
         this.nomeDica = nomeDica;
@@ -75,6 +86,31 @@ public abstract class Dica {
         result = 31 * result + (nomeDica != null ? nomeDica.hashCode() : 0);
         return result;
     }
+/*
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDeslike() {
+        return deslike;
+    }
+
+    public void setDeslike(int deslike) {
+        this.deslike = deslike;
+    }
+
+    public void addLike(){
+        like+=1;
+    }
+
+    public void addDeslike(){
+        deslike+=1;
+    }
+*/
 }
 /*Como aluno, clico em um tema e adiciono uma dica no tema. A dica pode ser de diferentes tipos*/
 /* verificar se fica assim mesmo*/

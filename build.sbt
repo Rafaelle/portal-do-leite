@@ -1,5 +1,3 @@
-import play.PlayJava
-
 name := """portal-do-leite"""
 
 version := "1.0-SNAPSHOT"

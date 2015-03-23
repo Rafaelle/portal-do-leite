@@ -3,6 +3,7 @@ package models;
 /**
  * Created by rafaelle on 10/03/15.
  */
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,12 @@ public class Disciplina {
     @Enumerated(EnumType.STRING)
     private String nomeDisciplina;
 
-    @OneToMany(	cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch=FetchType.LAZY,mappedBy="Disciplina")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY, mappedBy = "Disciplina")
     private List<Tema> temas;
 
-    public Disciplina(){}
+    public Disciplina() {
+    }
 
     public Disciplina(String nomeDisciplina) {
         this.nomeDisciplina = nomeDisciplina;
@@ -51,11 +53,11 @@ public class Disciplina {
     }
 
     public void addTema(Tema tema) {
-        if (temas.equals(null)){
+        if (temas.equals(null)) {
             temas = new ArrayList<Tema>();
             // recursividde cria o array e depois volta para o proprio metodo com o array criado e adicionando
             // o tema
-            addTema(tema);
+            temas.add(tema);
         } else {
             temas.add(tema);
         }
